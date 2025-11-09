@@ -6,8 +6,8 @@ import {
   setFavorites,
   setFavoritesToggle,
   setProduct,
-} from "../slices/product";
-import axios from "axios";
+} from '../slices/product';
+import axios from 'axios';
 
 export const getProducts = (page, favoriteToggle) => async (dispatch) => {
   dispatch(setLoading());
@@ -23,7 +23,7 @@ export const getProducts = (page, favoriteToggle) => async (dispatch) => {
           ? error.response.data.message
           : error.message
           ? error.message
-          : "An unexpected error occured. PLease try again later"
+          : 'An unexpected error occured. PLease try again later'
       )
     );
   }
@@ -32,8 +32,8 @@ export const getProducts = (page, favoriteToggle) => async (dispatch) => {
 export const getProduct = (id) => async (dispatch) => {
   dispatch(setLoading());
   try {
-    const { data } = await axios.get(`/api/product/${id}`);
-    dispatch(setProducts(data));
+    const { data } = await axios.get(`/api/products/${id}`);
+    dispatch(setProduct(data));
   } catch (error) {
     dispatch(
       setError(
@@ -41,7 +41,7 @@ export const getProduct = (id) => async (dispatch) => {
           ? error.response.data.message
           : error.message
           ? error.message
-          : "An unexpected error occured. PLease try again later"
+          : 'An unexpected error occured. PLease try again later'
       )
     );
   }
@@ -53,7 +53,7 @@ export const addToFavorites = (id) => async (dispatch, getState) => {
   } = getState();
 
   const newFavorites = [...favorites, id];
-  localStorage.setItem("favorites", JSON.stringify(newFavorites));
+  localStorage.setItem('favorites', JSON.stringify(newFavorites));
   dispatch(setFavorites(newFavorites));
 };
 
@@ -63,7 +63,7 @@ export const removeFromFavorites = (id) => async (dispatch, getState) => {
   } = getState();
 
   const newFavorites = favorites.filter((favoriteId) => favoriteId !== id);
-  localStorage.setItem("favorites", JSON.stringify(newFavorites));
+  localStorage.setItem('favorites', JSON.stringify(newFavorites));
   dispatch(setFavorites(newFavorites));
 };
 

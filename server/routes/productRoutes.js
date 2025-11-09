@@ -1,5 +1,5 @@
-import express from "express";
-import Product from "../models/Product.js";
+import express from 'express';
+import Product from '../models/Product.js';
 
 const productRoutes = express.Router();
 
@@ -27,18 +27,20 @@ const getProducts = async (req, res) => {
 };
 
 const getProduct = async (req, res) => {
+  //console.log('id: ' + req.params.id);
   const product = await Product.findById(req.params.id);
+  //console.log({ product });
 
   if (product) {
     res.json(product);
   } else {
     res.status(404);
-    throw new Error("Product not found");
+    throw new Error('Product not found');
   }
 };
 
-productRoutes.route("/:page/:perPage").get(getProducts);
-productRoutes.route("/").get(getProducts);
-productRoutes.route("/:id").get(getProduct);
+productRoutes.route('/:page/:perPage').get(getProducts);
+productRoutes.route('/').get(getProducts);
+productRoutes.route('/:id').get(getProduct);
 
 export default productRoutes;

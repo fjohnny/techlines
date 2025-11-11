@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 export const initialState = {
   loading: false,
@@ -6,13 +6,13 @@ export const initialState = {
   products: [],
   product: null,
   pagination: {},
-  favoritesToggled: true,
+  favoritesToggled: false,
   reviewed: false,
-  favorites: JSON.parse(localStorage.getItem("favorites")) ?? [],
+  favorites: JSON.parse(localStorage.getItem('favorites')) ?? [],
 };
 
 export const productsSlice = createSlice({
-  name: "products",
+  name: 'products',
   initialState,
   reducers: {
     setLoading: (state) => {

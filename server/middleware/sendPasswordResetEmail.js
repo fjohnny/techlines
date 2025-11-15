@@ -1,8 +1,5 @@
 import nodemailer from 'nodemailer';
 
-//hchz kosm nfya sfcw
-//johnnyfra@gmail.com
-
 export const sendPasswordResetEmail = (token, email, name) => {
     const html = `
       <html>
@@ -18,7 +15,7 @@ export const sendPasswordResetEmail = (token, email, name) => {
         service: 'gmail',
         auth: {
             user: 'johnnyfra@gmail.com',
-            pass: 'hchz kosm nfya sfcw',
+            pass: process.env.GOOGLE_APP_PASS,
         },
     });
 

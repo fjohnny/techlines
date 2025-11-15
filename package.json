@@ -6,8 +6,10 @@
   "type": "module",
   "scripts": {
     "server": "node server/index.js",
+    "dev": "nodemon server/index.js",
     "client": "npm run start --prefix client",
-    "app": "concurrently npm \"npm run server\" \"npm run client \""
+    "app": "concurrently npm \"npm run server\" \"npm run client \"",
+    "devapp": "concurrently npm \"npm run dev\" \"npm run client \""
   },
   "keywords": [],
   "author": "",
@@ -24,5 +26,8 @@
     "mongoose": "^8.19.2",
     "nodemailer": "^7.0.10",
     "stripe": "^19.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
   }
 }

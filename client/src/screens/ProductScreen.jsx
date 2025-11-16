@@ -1,4 +1,4 @@
-import { MinusIcon, SmallAddIcon } from '@chakra-ui/icons';
+import { MinusIcon, SmallAddIcon } from "@chakra-ui/icons";
 import {
   Alert,
   AlertDescription,
@@ -17,15 +17,15 @@ import {
   Text,
   Wrap,
   useToast,
-} from '@chakra-ui/icons';
+} from "@chakra-ui/icons";
 
-import { BiCheckShield, BiPackage, BiSupport } from 'react-icons/bi';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { getProduct } from '../redux/actions/productActions';
-import { useEffect, useState } from 'react';
-import { addCartItem } from '../redux/actions/cartActions';
-import Star from '../components/Star';
+import { BiCheckShield, BiPackage, BiSupport } from "react-icons/bi";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { getProduct } from "../redux/actions/productActions";
+import { useEffect, useState } from "react";
+import { addCartItem } from "../redux/actions/cartActions";
+import Star from "../components/Star";
 
 const ProductScreen = () => {
   const [amount, setAmount] = useState(1);
@@ -41,10 +41,10 @@ const ProductScreen = () => {
   }, [dispatch, id]);
 
   const changeAmount = (input) => {
-    if (input === 'plus') {
+    if (input === "plus") {
       setAmount(amount + 1);
     }
-    if (input === 'minus') {
+    if (input === "minus") {
       setAmount(amount - 1);
     }
   };
@@ -57,8 +57,8 @@ const ProductScreen = () => {
       dispatch(addCartItem(id, amount));
     }
     toast({
-      description: 'Item has been added.',
-      status: 'success',
+      description: "Item has been added.",
+      status: "success",
       isClosable: true,
     });
   };
@@ -67,7 +67,7 @@ const ProductScreen = () => {
     <Wrap spacing='30px' justify='center' minHeight='100vh'>
       {loading ? (
         <Stack direction='row' spacing='4'>
-          <Spinner mt='20' thiknes='2px' speed='0.65s' emptyColor='gray.200' color='cyan.500' size='xl' />
+          <Spinner mt='20' thickness='2px' speed='0.65s' emptyColor='gray.200' color='cyan.500' size='xl' />
         </Stack>
       ) : error ? (
         <Alert status='error'>
@@ -78,14 +78,14 @@ const ProductScreen = () => {
       ) : (
         product && (
           <Box
-            maxW={{ base: '3xl', lg: '5xl' }}
+            maxW={{ base: "3xl", lg: "5xl" }}
             mx='auto'
-            px={{ base: '4', md: '8', lg: '12' }}
-            py={{ base: '6', md: '8', lg: '12' }}
+            px={{ base: "4", md: "8", lg: "12" }}
+            py={{ base: "6", md: "8", lg: "12" }}
             borderWidth={1}
           >
-            <Stack direction={{ base: 'column', lg: 'row' }} align='flex-start'>
-              <Stack pr={{ base: '0', md: 'row' }} flex='1.5' mb={{ base: '12', md: 'none' }}>
+            <Stack direction={{ base: "column", lg: "row" }} align='flex-start'>
+              <Stack pr={{ base: "0", md: "row" }} flex='1.5' mb={{ base: "12", md: "none" }}>
                 {product.productIsNew && (
                   <Badge p='2' rounded='md' w='50px' fontSize='0.8em' colorScheme='green'>
                     New
@@ -119,12 +119,12 @@ const ProductScreen = () => {
                   <Text>{product.description}</Text>
                   <Text fontWeight='bold'>Quantity: </Text>
                   <Flex width='170px' p='5px' border='1px' borderColor='gray.200' alignItems='center'>
-                    <Button isDisabled={amount <= 1} onClick={() => changeAmount('minus')}>
+                    <Button isDisabled={amount <= 1} onClick={() => changeAmount("minus")}>
                       <MinusIcon />
                     </Button>
                     <Text mx='30px'>{amount}</Text>
 
-                    <Button isDisabled={amount >= product.stock} onClick={() => changeAmount('plus')}>
+                    <Button isDisabled={amount >= product.stock} onClick={() => changeAmount("plus")}>
                       <SmallAddIcon />
                     </Button>
                   </Flex>
@@ -161,7 +161,7 @@ const ProductScreen = () => {
                   </Stack>
                 </Stack>
               </Stack>
-              <Flex direction='column' align='center' flex='1' _dark={{ bg: 'gray.900' }}>
+              <Flex direction='column' align='center' flex='1' _dark={{ bg: "gray.900" }}>
                 <Image mb='30px' src={product.images[0]} alt={product.name} fallbackSrc='https://placehold.in/250' />
                 <Image mb='30px' src={product.images[1]} alt={product.name} fallbackSrc='https://placehold.in/250' />
               </Flex>

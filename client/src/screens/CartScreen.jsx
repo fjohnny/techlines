@@ -12,22 +12,22 @@ import {
   AlertDescription,
   Wrap,
   AlertTitle,
-} from '@chakra-ui/react';
-import { Link as ReactLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import CartItem from '../components/CartItem';
-import OrderSummary from '../components/OrderSummary';
+} from "@chakra-ui/react";
+import { Link as ReactLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import CartItem from "../components/CartItem";
+import OrderSummary from "../components/OrderSummary";
 
 const CartScreen = () => {
   const { loading, error, cartItems } = useSelector((state) => state.cart);
 
-  const getHeadingContent = () => (cartItems.length === 1 ? '(1 Item)' : `${cartItems.length} Items`);
+  const getHeadingContent = () => (cartItems.length === 1 ? "(1 Item)" : `${cartItems.length} Items`);
 
   return (
     <Wrap spacing='30px' justify='center' minHeight='100vh'>
       {loading ? (
         <Stack direction='row' spacing='4'>
-          <Spinner mt='20' thiknes='2px' speed='0.65s' emptyColor='gray.200' color='cyan.500' size='xl' />
+          <Spinner mt='20' thickness='2px' speed='0.65s' emptyColor='gray.200' color='cyan.500' size='xl' />
         </Stack>
       ) : error ? (
         <Alert status='error'>
@@ -46,13 +46,13 @@ const CartScreen = () => {
           </AlertDescription>
         </Alert>
       ) : (
-        <Box px='4' py='8' w={{ base: '95%', md: '70%', lg: '50%' }}>
+        <Box px='4' py='8' w={{ base: "95%", md: "70%", lg: "50%" }}>
           <Stack
-            direction={{ base: 'column', lg: 'row' }}
-            align={{ lg: 'flex-start' }}
-            spacing={{ base: '8', md: '16' }}
+            direction={{ base: "column", lg: "row" }}
+            align={{ lg: "flex-start" }}
+            spacing={{ base: "8", md: "16" }}
           >
-            <Stack spacing={{ base: '8', md: '10' }} flex='2'>
+            <Stack spacing={{ base: "8", md: "10" }} flex='2'>
               <Heading fontSize='2xl' fontWeight='extrabold'>
                 Shopping Cart
               </Heading>
@@ -66,7 +66,7 @@ const CartScreen = () => {
               <OrderSummary />
               <HStack mt='6' fontWeight='semibold'>
                 <p>or</p>
-                <Link as={ReactLink} to='/products' color={mode('cyan.500', 'cyan.200')}>
+                <Link as={ReactLink} to='/products' color={mode("cyan.500", "cyan.200")}>
                   Continue Shopping
                 </Link>
               </HStack>

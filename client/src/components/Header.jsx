@@ -10,6 +10,7 @@ import {
     HStack,
     Icon,
     IconButton,
+    Image,
     Menu,
     MenuButton,
     MenuDivider,
@@ -33,6 +34,8 @@ import { toggleFavorites } from '../redux/actions/productActions';
 import { logoutUser } from '../redux/actions/userActions';
 import ColorModeToggle from './ColorModeToggle';
 import NavLink from './NavLink';
+import { FcGoogle } from 'react-icons/fc';
+import { googleLogout } from '@react-oauth/google';
 
 const Links = [
     { name: 'Products', route: '/products' },
@@ -58,6 +61,7 @@ const Header = () => {
     }, [favoritesToggled, dispatch, showBanner, userInfo]);
 
     const logoutHandler = () => {
+        googleLogout();
         dispatch(logoutUser());
         toast({
             description: 'You have been logged our',
@@ -150,7 +154,17 @@ const Header = () => {
                             <Menu>
                                 <MenuButton rounded='full' variant='link' cursor='pointer' minW='0'>
                                     <HStack>
-                                        <BiUserCheck size='30' />
+                                        {userInfo.googleImage ? (
+                                            <Image
+                                                borderRadius='full'
+                                                boxSize='40px'
+                                                src={userInfo.googleImage}
+                                                referrerPolicy='no-referrer'
+                                            />
+                                        ) : (
+                                            <BiUserCheck size='30' />
+                                        )}
+
                                         <ChevronDownIcon />
                                     </HStack>
                                 </MenuButton>
@@ -159,6 +173,7 @@ const Header = () => {
                                         <Text pl='3' as='i'>
                                             {userInfo.email}
                                         </Text>
+                                        {userInfo.googleId && <FcGoogle />}
                                     </HStack>
                                     <Divider py='1' />
                                     <MenuItem as={ReactLink} to='/order-history'>

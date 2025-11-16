@@ -21,7 +21,10 @@ import * as Yup from 'yup';
 import PasswordField from '../components/helpers/PasswordField';
 import PasswordForgottenForm from '../components/PasswordForgottenForm';
 import TextField from '../components/helpers/TextField';
-import { login } from '../redux/actions/userActions';
+import { googleLogin, login } from '../redux/actions/userActions';
+import { useGoogleLogin } from '@react-oauth/google';
+import axios from 'axios';
+import { FcGoogle } from 'react-icons/fc';
 
 const LoginScreen = () => {
     const dispatch = useDispatch();
@@ -55,6 +58,21 @@ const LoginScreen = () => {
             });
         }
     }, [userInfo, redirect, error, navigate, location.state, toast, serverMessage]);
+
+    const handleGoogleLogin = useGoogleLogin({
+        onSuccess: async (response) => {
+            const userInfo = await axios
+                .get('https://www.googleapis.com/oauth2/v3/userinfo', {
+                    headers: { Authorization: `Bearer ${response.access_token}` },
+                })
+                .then((res) => res.data);
+            const { sub, email, name, picture } = userInfo;
+            dispatch(googleLogin(sub, email, name, picture));
+        },
+        onError: (error) => {
+            console.log({ error });
+        },
+    });
 
     return (
         <Formik
@@ -139,6 +157,16 @@ const LoginScreen = () => {
                                         type='submit'
                                     >
                                         Sign in
+                                    </Button>
+                                    <Button
+                                        leftIcon={<FcGoogle />}
+                                        colorScheme='cyan'
+                                        size='lg'
+                                        fontSize='md'
+                                        isLoading={loading}
+                                        onClick={() => handleGoogleLogin()}
+                                    >
+                                        Google sign in
                                     </Button>
                                 </Stack>
                             </Stack>
